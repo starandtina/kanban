@@ -85,6 +85,11 @@ if (TARGET === 'dev') {
           test: /\.jsx?$/,
           loaders: ['react-hot', 'babel'],
           include: path.join(ROOT_PATH, 'app')
+        },
+        {
+          test: /\.jsx?$/,
+          loaders: ['react-hot', 'babel', 'flowcheck'],
+          include: path.join(ROOT_PATH, 'app'),
         }
       ]
     },

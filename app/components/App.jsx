@@ -1,8 +1,53 @@
 import React from 'react';
-import Note from './Note';
+import Notes from './Notes';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      notes: [{
+        task: 'Learn Webpack'
+      }, {
+        task: 'Learn React'
+      }, {
+        task: 'Do laundry'
+      }]
+    };
+  }
+
   render() {
-    return <Note />;
+    var notes = this.state.notes;
+
+    return (
+      <div>
+        <button onClick={this.addItem.bind(this)}>+</button>
+        <Notes
+          items={notes}
+          onEdit={this.itemEdited.bind(this)} />
+      </div>
+    );
+  }
+
+  itemEdited(i, task) {
+    var notes = this.state.notes;
+
+    if (task) {
+      notes[i].task = task;
+    } else {
+      notes.splice(i, 1);
+    }
+
+    this.setState({
+      notes: notes
+    });
+  }
+
+  addItem() {
+    this.setState({
+      notes: this.state.notes.concat([{
+        task: 'New task'
+      }])
+    });
   }
 }
